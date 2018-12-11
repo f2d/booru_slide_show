@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Booru tag slideshow</title>
+	<link rel="shortcut icon" type="image/png" href="index.png">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script>
+	var	laLineComment = 'After a separate dash/minus symbol - rest of the line is skipped as a comment.'
+	,	la = {
+			'hint': [
+				'Page controls:'
+			,	'Left click on background = pause.'
+			,	'Press Enter = start.'
+			,	'Press Spacebar = start/pause.'
+			,	'Press Del/Backspace = reload pic.'
+			,	'Left click on history pic = restore it.'
+			,	'Middle click on history pic = open its source page.'
+			]
+		,	'display-time': 'Number of seconds to show each pic.'
+		,	'search-tags': [
+				'Tags to search, separated by spaces.'
+			,	'Tag sets are separated by lines.'
+			,	'One set is taken randomly at each change.'
+			,	'All tags in a set are used at once in a search request.'
+			,	laLineComment
+			]
+		,	'search-sites': [
+				'Site addresses, separated by spaces.'
+			,	'Site sets are separated by lines.'
+			,	'One set is taken randomly at each change.'
+			,	'Request is sent to each site in set one by one, until a working one is found.'
+			,	laLineComment
+			]
+		,	'notepad': 'You can save notes here and copy-paste parts for later use.'
+		,	'continue': 'Continue'
+		,	'stop': 'Stop'
+		,	'pause': 'Pause'
+		,	'load-pic': 'Change pic'
+		,	'error_not_found': 'Error: no images found.'
+		,	'add_tag': 'Add this tag to slideshow.'
+		,	'pic_info': {
+				'booru': 'Click here to see original'
+			,	'time_shown': 'Shown'
+			,	'time_created': 'Created'
+			,	'time_updated': 'Updated'
+			,	'download': 'Download'
+			,	'hash': 'MD5 hash'
+			,	'rating': 'Rating'
+			,	'ratings': {
+					's': 'safe'
+				,	'q': 'questionable'
+				,	'e': 'explicit'
+				}
+			,	'source': 'Source'
+			,	'pixiv_id': 'Pixiv ID'
+			,	'tags': {
+					'by': 'By'
+				,	'from': 'From'
+				,	'char': 'Characters'
+				,	'meta': 'Meta tags'
+				,	'etc': 'Other tags'
+				}
+			}
+		};
+	</script>
+	<script src="index.js"></script>
+</head>
+<body>
+	Loading page...
+</body>
+</html>
