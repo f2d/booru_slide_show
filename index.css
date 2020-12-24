@@ -125,7 +125,7 @@ button {
 	text-align: center;
 	width: 128px;
 	height: 128px;
-	line-height: 128px;
+	line-height: 1px;
 	border-radius: 100%;
 	border: 2px solid transparent;
 }
@@ -134,6 +134,19 @@ button + button {
 }
 button:hover:not(:active) {
 	color: #eee !important;
+}
+button[name="pause"]::after {
+	content: "ll";
+}
+button[name="continue"]::before {
+	visibility: hidden;
+	content: "l";
+}
+button[name="continue"]::after {
+	content: "\25B6";
+}
+button[name="load-pic"]::after {
+	content: "\21BB";
 }
 .paused #pause, #pause:active {
 	color: #eda;
@@ -179,8 +192,18 @@ a:hover {
 .hide-out(:hover) .hide-in {
 	z-index: 99;
 }
-html:not(:hover) .hide-out,
-html .hide-out:not(:hover) .hide-in,
+html .hide-out {
+	transition: opacity 0.2s ease;
+}
+html .hide-out .hide-in {
+	transition: display 0.2s ease;
+}
+html:not(:hover) .hide-out {
+	opacity: 0;
+}
+html .hide-out:not(:hover) .hide-in {
+	display: none;
+}
 .hide-in:empty,
 #preload-pic,
 #slideshow-history .thumb *:not(a):not(img),
