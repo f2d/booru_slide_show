@@ -123,6 +123,7 @@ button {
 	font-family: sans-serif;
 	font-size: 96px;
 	text-align: center;
+	vertical-align: top;
 	width: 128px;
 	height: 128px;
 	line-height: 1px;
@@ -135,17 +136,17 @@ button + button {
 button:hover:not(:active) {
 	color: #eee !important;
 }
-button[name="pause"]::after {
+button:empty[name="pause"]::after {
 	content: "ll";
 }
-button[name="continue"]::before {
+button:empty[name="continue"]::before {
 	visibility: hidden;
 	content: "l";
 }
-button[name="continue"]::after {
+button:empty[name="continue"]::after {
 	content: "\25B6";
 }
-button[name="load-pic"]::after {
+button:empty[name="load-pic"]::after {
 	content: "\21BB";
 }
 .paused #pause, #pause:active {
@@ -196,13 +197,15 @@ html .hide-out {
 	transition: opacity 0.2s ease;
 }
 html .hide-out .hide-in {
-	transition: display 0.2s ease;
+	/* transition: height 0.2s ease; */
 }
 html:not(:hover) .hide-out {
 	opacity: 0;
 }
 html .hide-out:not(:hover) .hide-in {
 	display: none;
+	/* height: 0; */
+	/* overflow: hidden; */
 }
 .hide-in:empty,
 #preload-pic,

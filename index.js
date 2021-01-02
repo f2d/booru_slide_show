@@ -1,7 +1,7 @@
 
 //* TODO: checkbox: sequential search iteration, or random order.
 //* TODO: checkbox/radio: light theme / dark / change with system time.
-//* TODO: textareas: export to json/txt file, export all settings, dragndrop settings from file.
+//* TODO: textareas: export to json/txt file, export all settings, dragndrop settings from file, button to sort + deduplicate list.
 //* TODO: gelbooru, etc
 
 var	LS = window.localStorage || localStorage
@@ -903,6 +903,44 @@ function onKeyPress(e) {
 	}
 }
 
+function getSVGButtonHTML(id, onclick, data, encode) {
+	if (data) {
+		data = (
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="currentColor">'
+		+		data
+		+	'</svg>'
+		);
+
+//* Note: embedded object is more complicated to style.
+
+		if (encode) {
+			data = (
+				'<object type="image/svg+xml" data="data:image/svg+xml;'
+
+//* Note: data URIs do not have to be base64.
+//* Source: https://css-tricks.com/using-svg/#format-for-data-uri
+
+				// + 'base64,'
+				// + btoa(
+
+				+ 'charset=UTF-8,'
+				+ encodeURIComponent(data)
+				+ '">'
+			+		'<script>'
+			+			'id("' + id + '").innerHTML = "";'
+			+		'</script>'
+			+	'</object>'
+			);
+		}
+	}
+
+	return (
+		'<button id="' + id + '" onclick="' + onclick + '">'
+	+		(data || '')
+	+	'</button>'
+	);
+}
+
 function init() {
 	logVar('init started.');
 
@@ -913,6 +951,11 @@ function init() {
 
 	bgContainer.addEventListener('click', pause, false);
 	document.body.addEventListener('keydown', onKeyPress, false);
+
+var	pauseButtonSVG = '<polygon points="32,32 56,32 56,96 32,96 "/><polygon points="72,32 96,32 96,96 72,96 "/>'
+,	continueButtonSVG = '<polygon points="48,32 96,64 48,96 "/>'
+,	reloadButtonSVG = ''
+	;
 
 	document.body.innerHTML = (
 		'<div id="status" class="hide-out">'
@@ -925,9 +968,9 @@ function init() {
 	+	'<div id="panels">'
 	+		'<aside id="control-panel" class="hide-out left">'
 	+			'<section id="buttons">'
-	+				'<button id="pause"    onclick="pause()"></button>'
-	+				'<button id="continue" onclick="unpause()"></button>'
-	+				'<button id="load-pic" onclick="loadPic()"></button>'
+	+				getSVGButtonHTML('pause', 'pause()', pauseButtonSVG)
+	+				getSVGButtonHTML('continue', 'unpause()', continueButtonSVG)
+	+				getSVGButtonHTML('load-pic', 'loadPic()', reloadButtonSVG)
 	+			'</section>'
 	+			'<section id="config" class="hide-in">'
 	+				'<input type="number" min="5" step="5" id="display-time" onchange="setDisplayTime()" /><br>'
