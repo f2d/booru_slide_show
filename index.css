@@ -136,6 +136,9 @@ button .click-area {
 	fill-opacity: 0;
 	stroke-opacity: 0;
 }
+button svg {
+	pointer-events: none;	/* <- https://stackoverflow.com/a/63083605 */
+}
 button + button {
 	margin-left: 8px;
 }
