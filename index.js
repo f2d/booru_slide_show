@@ -906,8 +906,18 @@ function onKeyPress(e) {
 function getSVGButtonHTML(id, onclick, data, encode) {
 	if (data) {
 		data = (
-			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="currentColor">'
+			'<svg xmlns="http://www.w3.org/2000/svg'
+		+	'" viewBox="0 0 128 128'
+		+	'" fill="currentColor'
+		+	(!onclick ? '' : '" onclick="buttonClick(' + onclick + ')')
+		+	'">'
 		+		data
+		+		(!onclick ? '' :
+					'<rect class="click-area'
+				+	'" x="0" y="0" width="128" height="128'
+				+	'" onclick="buttonClick(' + onclick + ')'
+				+	'">'
+				)
 		+	'</svg>'
 		);
 
@@ -920,12 +930,12 @@ function getSVGButtonHTML(id, onclick, data, encode) {
 //* Note: data URIs do not have to be base64.
 //* Source: https://css-tricks.com/using-svg/#format-for-data-uri
 
-				// + 'base64,'
-				// + btoa(
+			// +	'base64,'
+			// +	btoa(
 
-				+ 'charset=UTF-8,'
-				+ encodeURIComponent(data)
-				+ '">'
+			+	'charset=UTF-8,'
+			+	encodeURIComponent(data)
+			+	'">'
 			+		'<script>'
 			+			'id("' + id + '").innerHTML = "";'
 			+		'</script>'
@@ -935,10 +945,17 @@ function getSVGButtonHTML(id, onclick, data, encode) {
 	}
 
 	return (
-		'<button id="' + id + '" onclick="' + onclick + '">'
+		'<button id="' + id
+	+	(!onclick ? '' : '" onclick="buttonClick(' + onclick + ')')
+	+	'">'
 	+		(data || '')
 	+	'</button>'
 	);
+}
+
+function buttonClick(action) {
+	eventStop(0,1);
+	action();
 }
 
 function init() {
@@ -968,9 +985,9 @@ var	pauseButtonSVG = '<polygon points="32,32 56,32 56,96 32,96 "/><polygon point
 	+	'<div id="panels">'
 	+		'<aside id="control-panel" class="hide-out left">'
 	+			'<section id="buttons">'
-	+				getSVGButtonHTML('pause', 'pause()', pauseButtonSVG)
-	+				getSVGButtonHTML('continue', 'unpause()', continueButtonSVG)
-	+				getSVGButtonHTML('load-pic', 'loadPic()', reloadButtonSVG)
+	+				getSVGButtonHTML('pause', 'pause', pauseButtonSVG)
+	+				getSVGButtonHTML('continue', 'unpause', continueButtonSVG)
+	+				getSVGButtonHTML('load-pic', 'loadPic', reloadButtonSVG)
 	+			'</section>'
 	+			'<section id="config" class="hide-in">'
 	+				'<input type="number" min="5" step="5" id="display-time" onchange="setDisplayTime()" /><br>'

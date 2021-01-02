@@ -130,6 +130,12 @@ button {
 	border-radius: 100%;
 	border: 2px solid transparent;
 }
+button .click-area {
+	stroke: #fff;
+	fill: #fff;
+	fill-opacity: 0;
+	stroke-opacity: 0;
+}
 button + button {
 	margin-left: 8px;
 }
